@@ -16,6 +16,7 @@ db.init_app(app)
 app.secret_key = 'jose'
 api = Api(app)
 
+app.config['JWT_AUTH_URL_RULE'] = '/login'
 jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Item, '/item/<int:item_id>')
