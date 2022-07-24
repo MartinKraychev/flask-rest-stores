@@ -26,11 +26,11 @@ class Item(Resource):
 
     @jwt_required()
     def put(self, item_id):
-        data = item_parser.parse_args()
         item = ItemModel.find_by_id(item_id)
         if not item:
             return {"message": "Item not found"}, 404
 
+        data = item_parser.parse_args()
         item.price = data['price']
         item.store_id = data['store_id']
         item.name = data['name']

@@ -24,6 +24,18 @@ class Store(Resource):
         store.delete_from_db()
         return {'message': 'store deleted'}, 204
 
+    @jwt_required()
+    def put(self, store_id):
+        store = StoreModel.find_by_id(store_id)
+        if not store:
+            return {"message": "Item not found"}, 404
+
+        data = store_parser.parse_args()
+        store.name = data['name']
+        store.save_to_db()
+
+        return marshal(store, store_resource_fields), 201
+
 
 class StoreList(Resource):
 
