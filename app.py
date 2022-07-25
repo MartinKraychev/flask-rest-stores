@@ -1,14 +1,13 @@
 import os
 
 from flask import Flask
-from flask_restful import Api
 from flask_jwt_extended import JWTManager
+from flask_restful import Api
 
+from db import db
+from resources.item import Item, ItemList
 from resources.store import StoreList, Store
 from resources.user import UserRegister, User, UserLogin
-from resources.item import Item, ItemList
-from db import db
-
 
 uri = os.getenv("DATABASE_URL", 'sqlite:///db.sqlite3')
 if uri.startswith("postgres://"):

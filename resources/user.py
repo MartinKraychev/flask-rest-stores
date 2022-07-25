@@ -1,21 +1,22 @@
+from hmac import compare_digest
+
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required
 from flask_restful import Resource, reqparse, marshal
 
 from models.user import UserModel
 from resources.utils.resource_fieds import user_resource_fields
-from hmac import compare_digest
 
 _user_parser = reqparse.RequestParser()
 _user_parser.add_argument('username',
-                    type=str,
-                    required=True,
-                    help="This field cannot be left blank!"
-                    )
+                          type=str,
+                          required=True,
+                          help="This field cannot be left blank!"
+                          )
 _user_parser.add_argument('password',
-                    type=str,
-                    required=True,
-                    help="This field cannot be left blank!"
-                    )
+                          type=str,
+                          required=True,
+                          help="This field cannot be left blank!"
+                          )
 
 
 class UserRegister(Resource):
@@ -64,8 +65,8 @@ class UserLogin(Resource):
             refresh_token = create_refresh_token(identity=user.id)
 
             return {
-                'access_token': access_token,
-                'refresh_token': refresh_token
-            }, 200
+                       'access_token': access_token,
+                       'refresh_token': refresh_token
+                   }, 200
         else:
             return {'message': 'Invalid credentials'}, 401
