@@ -5,6 +5,10 @@
   - Auth:
     - POST -> https://flask-rest-stores-app.herokuapp.com/register
     - POST ->  https://flask-rest-stores-app.herokuapp.com/login
+    
+  - Users:
+    - GET -> https://flask-rest-stores-app.herokuapp.com/users/{id}
+    - DELETE -> https://flask-rest-stores-app.herokuapp.com/users/{id} 
    
   - Stores:
     - GET ->  https://flask-rest-stores-app.herokuapp.com/stores
