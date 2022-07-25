@@ -1,5 +1,6 @@
-from flask_restful import Resource, reqparse
+from flask_restful import Resource, reqparse, marshal
 from models.user import UserModel
+from resources.utils.resource_fieds import user_resource_fields
 
 
 class UserRegister(Resource):
@@ -26,3 +27,22 @@ class UserRegister(Resource):
         user.save_to_db()
 
         return {"message": "User created successfully."}, 201
+
+
+class User(Resource):
+    @classmethod
+    def get(cls, user_id):
+        user = UserModel.find_by_id(user_id)
+        if not user:
+            return {'message': "User not found."}, 404
+
+        return marshal(user, user_resource_fields), 200
+
+    @classmethod
+    def delete(cls, user_id):
+        user = UserModel.find_by_id(user_id)
+        if not user:
+            return {'message': "User not found."}, 404
+
+        user.delete_from_db()
+        return {'message': 'User deleted'}, 200

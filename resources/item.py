@@ -2,8 +2,8 @@ from flask_jwt import jwt_required
 from flask_restful import Resource, marshal_with, marshal
 
 from models.item import ItemModel
-from resources.parsers import item_parser
-from resources.resource_fieds import item_resource_fields
+from resources.utils.parsers import item_parser
+from resources.utils.resource_fieds import item_resource_fields
 
 
 class Item(Resource):
@@ -22,7 +22,7 @@ class Item(Resource):
 
         item.delete_from_db()
 
-        return {'message': 'Item deleted'}, 204
+        return {'message': 'Item deleted'}, 200
 
     @jwt_required()
     def put(self, item_id):

@@ -2,8 +2,8 @@ from flask_jwt import jwt_required
 from flask_restful import Resource, marshal_with, marshal
 
 from models.store import StoreModel
-from resources.parsers import store_parser
-from resources.resource_fieds import store_resource_fields
+from resources.utils.parsers import store_parser
+from resources.utils.resource_fieds import store_resource_fields
 
 
 class Store(Resource):
@@ -22,7 +22,7 @@ class Store(Resource):
             return {'message': 'store not found'}, 404
 
         store.delete_from_db()
-        return {'message': 'store deleted'}, 204
+        return {'message': 'store deleted'}, 200
 
     @jwt_required()
     def put(self, store_id):

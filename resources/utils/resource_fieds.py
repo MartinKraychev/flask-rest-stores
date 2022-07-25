@@ -13,3 +13,8 @@ store_resource_fields = {
     'name': fields.String,
     'items': fields.Nested(item_resource_fields)
 }
+
+user_resource_fields = {
+    'id': fields.Integer,
+    'username': fields.String
+}
