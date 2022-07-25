@@ -2,11 +2,10 @@ import os
 
 from flask import Flask
 from flask_restful import Api
-from flask_jwt import JWT
+from flask_jwt_extended import JWTManager
 
 from resources.store import StoreList, Store
-from security import authenticate, identity
-from resources.user import UserRegister, User
+from resources.user import UserRegister, User, UserLogin
 from resources.item import Item, ItemList
 from db import db
 
@@ -23,12 +22,13 @@ db.init_app(app)
 app.secret_key = 'jose'
 api = Api(app)
 
-app.config['JWT_AUTH_URL_RULE'] = '/login'
-jwt = JWT(app, authenticate, identity)
+jwt = JWTManager(app)
+
 
 api.add_resource(Item, '/item/<int:item_id>')
 api.add_resource(ItemList, '/items')
 api.add_resource(UserRegister, '/register')
+api.add_resource(UserLogin, '/login')
 api.add_resource(StoreList, '/stores')
 api.add_resource(Store, '/store/<int:store_id>')
 api.add_resource(User, '/users/<int:user_id>')
