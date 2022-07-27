@@ -20,7 +20,7 @@ data = {
 }
 
 for key, val in data.items():
-
+    print(key, val)
     print(mapper[key](*val))
 
 
